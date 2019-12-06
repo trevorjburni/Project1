@@ -1,3 +1,17 @@
+// Web app's Firebase configuration 
+var firebaseConfig = {
+  apiKey: "AIzaSyCh8JY_njUtjC7bS2jMRPeUncurKX4RP9c",
+  authDomain: "project1-a73fb.firebaseapp.com",
+  databaseURL: "https://project1-a73fb.firebaseio.com",
+  projectId: "project1-a73fb",
+  storageBucket: "project1-a73fb.appspot.com",
+  messagingSenderId: "812455069447",
+  appId: "1:812455069447:web:a1321d67e3413975d327a2"
+};
+// Initialize Firebase 
+firebase.initializeApp(firebaseConfig);
+
+
 // Variables
 //==============================================================
 
