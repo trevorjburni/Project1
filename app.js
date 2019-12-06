@@ -11,43 +11,53 @@ var firebaseConfig = {
 // Initialize Firebase 
 firebase.initializeApp(firebaseConfig);
 
+// Zomato Button Listener, when the zomatoButton is pressed, run the following code.
+$("#zomatoButton").on("click", function () {
 
-// Variables
-//==============================================================
+  // Build the zomato URL.
+  var zomatoApiKey = "apikey=a582a844aec19f715b35eb3bf2d2580a";
+  var baseURL = "https://developers.zomato.com/api/v2.1/search?=";
+  var zomatoSearch = $("#zomatoSearch").val();
+  var zomatoCount = "&count=10";
+  var zomatoUrl = baseURL + zomatoSearch + zomatoApiKey + zomatoCount;
 
-var exampleURL = "https://developers.zomato.com/api/v2.1/search?q=mcdonalds&apikey=a582a844aec19f715b35eb3bf2d2580a";
-var apiKey = "apikey=a582a844aec19f715b35eb3bf2d2580a";
-var baseURL = "https://developers.zomato.com/api/v2.1/search?="
-var zomatoUrl = "";
+  //log out the zomatoUrl.
+  console.log(zomatoUrl);
 
-// Zomato API Call
-// ajax call to the zomato API
-$.ajax({
-  url: exampleURL,
-  method: "GET"
-}).then(function (response) {
-  console.log(response);
-});
+  // ajax call to the zomato API
+  $.ajax({
+    url: zomatoUrl,
+
+    // Below is used to test the hardcoded exampleURL.
+    //url: exampleURL,
+    url: zomatoUrl,
+    method: "GET"
+  }).then(function (response) {
+
+    // Log out the response from zomato
+    console.log(response);
+  });
 
 
-// Button for searching the open brewery API
-$('#beer').on('click', function () {
-      // Build the Open Brewery URL
-      var bURL = 'https://api.openbrewerydb.org/breweries?';
-      var typeBeer = $('#typeBeeer').val().trim();
-      var brewURL = bURL + typeBeer;
+  // Button for searching the open brewery API
+  $('#beer').on('click', function () {
+    // Build the Open Brewery URL
+    var bURL = 'https://api.openbrewerydb.org/breweries?';
+    var typeBeer = $('#typeBeeer').val().trim();
+    var brewURL = bURL + typeBeer;
 
-      // Log out the queryURL
-      console.log(brewURL);
+    // Log out the queryURL
+    console.log(brewURL);
 
-      // ajax call to the open brewery API
-      $.ajax({
-        url: brewURL,
-        method: 'GET'
-      }).then(function (results) {
+    // ajax call to the open brewery API
+    $.ajax({
+      url: brewURL,
+      method: 'GET'
+    }).then(function (results) {
 
-        // Log out the response from Open Brewery
-        console.log(results);
-      });
-      
+      // Log out the response from Open Brewery
+      console.log(results);
     });
+
+  });
+});
