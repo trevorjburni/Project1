@@ -37,27 +37,44 @@ $("#foodSearch").on("click", function () {
     // Log out the response from zomato
     console.log(response);
   });
+});
 
+// Button for searching the open brewery API
+$('#beerSearch').on('click', function () {
+  // Build the Open Brewery URL
+  var bURL = 'https://api.openbrewerydb.org/breweries?by_city';
+  // var typeBeer = $('#typeBeer').val().trim();
+  var cityBeer = $('#locationBeer').val().trim();
+  var brewURL = bURL + cityBeer;
 
-  // Button for searching the open brewery API
-  $('#beerSearch').on('click', function () {
-    // Build the Open Brewery URL
-    var bURL = 'https://api.openbrewerydb.org/breweries?';
-    var typeBeer = $('#typeBeer').val().trim();
-    var brewURL = bURL + typeBeer;
+  // Log out the queryURL
+  console.log(brewURL);
 
-    // Log out the queryURL
-    console.log(brewURL);
+  // ajax call to the open brewery API
+  $.ajax({
+    url: brewURL,
+    method: 'GET'
+  }).then(function (results) {
 
-    // ajax call to the open brewery API
-    $.ajax({
-      url: brewURL,
-      method: 'GET'
-    }).then(function (results) {
+    // Storing an array of results in the brewResults variable
+    var brewResults = results;
 
-      // Log out the response from Open Brewery
-      console.log(results);
-    });
+    // Loop through every result item
+    for (var i = 0; i < brewResults.length; i++) {
+      var brewName = brewResults[i].name;
+      var brewAddress = brewResults[i].street;
+      var brewCity = brewResults[i].city;
+      var brewState = brewResults[i].state;
+      var brewWebsite = brewResults[i].website_url;
+      // console.log out results of for loop
+      console.log(brewName);
+      console.log(brewAddress);
+      console.log(brewCity);
+      console.log(brewState);
+      console.log(brewWebsite);
+    };
+
+    // Append results to the index.html file
 
   });
 });
