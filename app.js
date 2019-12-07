@@ -68,7 +68,8 @@ function addToPage(name, link, address) {
 
   var newDiv = $("<div>");
   newDiv.attr({
-    class: "card horizontal"
+    class: "card horizontal",
+    id: name
   })
   var newDiv1 = $("<div>");
   newDiv1.attr({
@@ -99,11 +100,8 @@ function addToPage(name, link, address) {
   newDiv1.append(newDiv2)
   newDiv.append(newDiv1);
   divToAppendTo.append(newDiv);
-
-
 }
 
-// Logic for open brewery search
 
 // Button for searching the open brewery API
 $('#beerSearch').on('click', function () {
