@@ -120,4 +120,3 @@ $('#beerSearch').on('click', function () {
     console.log(results);
   });
 
-});
