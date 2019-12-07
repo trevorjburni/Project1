@@ -60,6 +60,7 @@ $("#foodSearch").on("click", function () {
   });
 });
 
+
 function addToPage(name, link, address) {
 
   // create variables
@@ -99,13 +100,13 @@ function addToPage(name, link, address) {
 
 
 }
-
 // Button for searching the open brewery API
 $('#beerSearch').on('click', function () {
   // Build the Open Brewery URL
-  var bURL = 'https://api.openbrewerydb.org/breweries?';
-  var typeBeer = $('#typeBeer').val().trim();
-  var brewURL = bURL + typeBeer;
+  var bURL = 'https://api.openbrewerydb.org/breweries?by_city';
+  // var typeBeer = $('#typeBeer').val().trim();
+  var cityBeer = $('#locationBeer').val().trim();
+  var brewURL = bURL + cityBeer;
 
   // Log out the queryURL
   console.log(brewURL);
@@ -116,7 +117,22 @@ $('#beerSearch').on('click', function () {
     method: 'GET'
   }).then(function (results) {
 
-    // Log out the response from Open Brewery
-    console.log(results);
-  });
+    // Storing an array of results in the brewResults variable
+    var brewResults = results;
 
+    // Loop through every result item
+    for (var i = 0; i < brewResults.length; i++) {
+      var brewName = brewResults[i].name;
+      var brewAddress = brewResults[i].street;
+      var brewCity = brewResults[i].city;
+      var brewState = brewResults[i].state;
+      var brewWebsite = brewResults[i].website_url;
+      // console.log out results of for loop
+      console.log(brewName);
+      console.log(brewAddress);
+      console.log(brewCity);
+      console.log(brewState);
+      console.log(brewWebsite);
+    };
+
+    // Append results to the index.html file
