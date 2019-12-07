@@ -60,4 +60,7 @@ $("#foodSearch").on("click", function () {
     });
 
   });
+  
+
 });
+
