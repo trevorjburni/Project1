@@ -12,12 +12,12 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Zomato Button Listener, when the zomatoButton is pressed, run the following code.
-$("#zomatoButton").on("click", function () {
+$("#foodSearch").on("click", function () {
 
   // Build the zomato URL.
   var zomatoApiKey = "apikey=a582a844aec19f715b35eb3bf2d2580a";
   var baseURL = "https://developers.zomato.com/api/v2.1/search?=";
-  var zomatoSearch = $("#zomatoSearch").val();
+  var zomatoSearch = $("#typeFood").val();
   var zomatoCount = "&count=10";
   var zomatoUrl = baseURL + zomatoSearch + zomatoApiKey + zomatoCount;
 
@@ -40,10 +40,10 @@ $("#zomatoButton").on("click", function () {
 
 
   // Button for searching the open brewery API
-  $('#beer').on('click', function () {
+  $('#beerSearch').on('click', function () {
     // Build the Open Brewery URL
     var bURL = 'https://api.openbrewerydb.org/breweries?';
-    var typeBeer = $('#typeBeeer').val().trim();
+    var typeBeer = $('#typeBeer').val().trim();
     var brewURL = bURL + typeBeer;
 
     // Log out the queryURL
