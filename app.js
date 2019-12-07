@@ -81,7 +81,9 @@ function addToPage(name, link, address) {
 
   var pPlace = $("<p>").text("Restaurant: " + name);
   var pLink = $("<p>").text("Link: ");
-  var aLink = $("<a>").attr({href: link});
+  var aLink = $("<a>").attr({
+    href: link
+  });
   aLink.text(link);
   pLink.append(aLink);
   var pAddress = $("<p>").text("Address: " + address);
@@ -100,16 +102,23 @@ function addToPage(name, link, address) {
 
 
 }
+
+// Logic for open brewery search
+
 // Button for searching the open brewery API
 $('#beerSearch').on('click', function () {
   // Build the Open Brewery URL
-  var bURL = 'https://api.openbrewerydb.org/breweries?by_city';
+  var bURL = "https://api.openbrewerydb.org/breweries?";
   // var typeBeer = $('#typeBeer').val().trim();
-  var cityBeer = $('#locationBeer').val().trim();
-  var brewURL = bURL + cityBeer;
+  var stateBeer = "by_state=" + $('#beerState').val().trim();
+  var cityBeer = "&by_city" + $('#locationBeer').val().trim();
+  var brewURL = bURL + stateBeer + cityBeer;
 
   // Log out the queryURL
   console.log(brewURL);
+
+  // Clearing out the list from any previous searches
+  clear();
 
   // ajax call to the open brewery API
   $.ajax({
@@ -126,6 +135,7 @@ $('#beerSearch').on('click', function () {
       var brewAddress = brewResults[i].street;
       var brewCity = brewResults[i].city;
       var brewState = brewResults[i].state;
+      var brewZip = brewResults[i].postal_code;
       var brewWebsite = brewResults[i].website_url;
       // console.log out results of for loop
       console.log(brewName);
@@ -133,6 +143,16 @@ $('#beerSearch').on('click', function () {
       console.log(brewCity);
       console.log(brewState);
       console.log(brewWebsite);
-    };
 
-    // Append results to the index.html file
+      var fullAddress = brewAddress + " " + brewCity + ", " + brewState + " " + brewZip;
+
+      addToPage(brewName, brewWebsite, fullAddress)
+
+    };
+  });
+});
+
+// Function to empty out the list of breweries
+function clear() {
+  $("#emptyDiv").empty();
+}
