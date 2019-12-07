@@ -60,6 +60,11 @@ $("#foodSearch").on("click", function () {
   });
 });
 
+$("#addToList").on("click", function() {
+  
+
+  
+});
 
 function addToPage(name, link, address) {
 
@@ -92,8 +97,10 @@ function addToPage(name, link, address) {
   button.attr({
     class: "btn waves-effect waves-light right",
     type: "submit",
-    name: "action"
+    name: "action",
+    id: "addToList"
   });
+
   button.text("Add to list");
 
   newDiv2.append(pPlace, pLink, pAddress, button);
@@ -150,7 +157,9 @@ $('#beerSearch').on('click', function () {
   });
 });
 
+
 // Function to empty out the list of breweries
 function clear() {
   $("#emptyDiv").empty();
 }
+
