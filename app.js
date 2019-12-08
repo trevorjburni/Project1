@@ -16,54 +16,79 @@ var database = firebase.database();
 // Zomato Button Listener, when the zomatoButton is pressed, run the following code.
 $("#foodSearch").on("click", function () {
 
+  // Clear out any cards from previous searches
+  clear();
+
+  // Build the MapQuest URL
+  var mapApiKey = "key=BQpcYBhtUmRdeHD49tWhOH8jS3nPFCx7";
+  var baseMapURL = "http://www.mapquestapi.com/geocoding/v1/address?";
+  var foodLocation = "&location=" + $("#locationFood").val().trim().replace(/\s/g, '');
+  var mapURL = baseMapURL + mapApiKey + foodLocation;
+
+  // log out the mapQuestUrl
+  console.log(mapURL);
+
   // Build the zomato URL.
-  var zomatoApiKey = "&apikey=a582a844aec19f715b35eb3bf2d2580a";
-  var baseURL = "https://developers.zomato.com/api/v2.1/search?=";
-  var zomatoSearch = $("#typeFood").val();
+  var zomatoApiKey = "apikey=a582a844aec19f715b35eb3bf2d2580a";
+  var baseZomatoURL = "https://developers.zomato.com/api/v2.1/search?";
+
+  // Commented out, It didn't seem to be working
+  // var zomatoSearch = "q=" + $("#typeFood").val().trim();
+
   var zomatoCount = "&count=10";
-  var zomatoUrl = baseURL + zomatoSearch + zomatoApiKey + zomatoCount;
+  var zomatoLong = "&lon=";
+  var zomatoLat = "&lat=";
+  var zomatoUrl = "";
+  var zomatoCollectionId = "&collection_id=1";
 
-  var exampleURL = "https://developers.zomato.com/api/v2.1/search?q=pizza" + zomatoApiKey + zomatoCount;
 
-  //log out the zomatoUrl.
-  console.log(zomatoUrl);
-
-  // ajax call to the zomato API
+  // ajax call to MapQuest
   $.ajax({
-    url: zomatoUrl,
-
-    // Below is used to test the hardcoded exampleURL.
-    url: exampleURL,
-    // url: zomatoUrl,
+    url: mapURL,
     method: "GET"
   }).then(function (response) {
 
-    // Log out the response from zomato
-    console.log(response);
+    // Get the longitude and Latitude out of the response and add those to zomatoLong and zomatoLat
+    zomatoLat += response.results[0].locations[0].latLng.lat;
+    zomatoLong += response.results[0].locations[0].latLng.lng;
 
-    for (var i = 0; i < response.restaurants.length; i++) {
-      console.log(response.restaurants[i].restaurant.name);
-      var restaurant = response.restaurants[i].restaurant;
-      var restaurantName = restaurant.name;
-      var restaurantLink = restaurant.url;
+    // Build Zomato URL
+    zomatoUrl = baseZomatoURL + zomatoApiKey + zomatoCount + zomatoLong + zomatoLat + zomatoCollectionId;
 
-      //TODO: need to update line below
+    // log out the zomatoUrl.
+    console.log(zomatoUrl);
 
-      var physicalAddress = restaurant.user_rating.aggregate_rating;
-      console.log(restaurantName, restaurantLink, physicalAddress)
 
-      // create a card an append it to the page.
+    // ajax call to thse zomato API
+    $.ajax({
+      url: zomatoUrl,
+      method: "GET"
+    }).then(function (response2) {
 
-      addToPage(restaurantName, restaurantLink, physicalAddress);
+      // Log out the response from zomato
+      console.log(response2);
 
-    }
+      for (var i = 0; i < response2.restaurants.length; i++) {
+        var restaurant = response2.restaurants[i].restaurant;
+        var restaurantName = restaurant.name;
+        var restaurantLink = restaurant.url;
+
+        //TODO: need to update line below
+        var physicalAddress = restaurant.user_rating.aggregate_rating;
+        console.log(restaurantName, restaurantLink, physicalAddress);
+
+        // create a card an append it to the page.
+        addToPage(restaurantName, restaurantLink, physicalAddress);
+
+      }
+    });
   });
 });
 
-$("#addToList").on("click", function() {
-  
+$("#addToList").on("click", function () {
 
-  
+
+
 });
 
 function addToPage(name, link, address) {
@@ -162,4 +187,3 @@ $('#beerSearch').on('click', function () {
 function clear() {
   $("#emptyDiv").empty();
 }
-
