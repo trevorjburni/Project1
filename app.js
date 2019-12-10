@@ -76,7 +76,7 @@ $("#foodSearch").on("click", function () {
         var restaurantLink = restaurant.url;
 
         //TODO: need to update line below
-        var physicalAddress = restaurant.user_rating.aggregate_rating;
+        var physicalAddress = restaurant.location.address;
         console.log(restaurantName, restaurantLink, physicalAddress);
 
         // create a card an append it to the page.
