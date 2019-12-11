@@ -21,18 +21,6 @@ var physicalAddress = "";
 
 // Zomato Button Listener, when the zomatoButton is pressed, run the following code.
 $("#foodSearch").on("click", function () {
-  
-  // Clear out any cards from previous searches
-  clear();
-
-  // Build the MapQuest URL
-  var mapApiKey = "key=BQpcYBhtUmRdeHD49tWhOH8jS3nPFCx7";
-  var baseMapURL = "http://www.mapquestapi.com/geocoding/v1/address?";
-  var foodLocation = "&location=" + $("#locationFood").val().trim().replace(/\s/g, '');
-  var mapURL = baseMapURL + mapApiKey + foodLocation;
-
-  // log out the mapQuestUrl
-  console.log(mapURL);
 
   // Clear out any cards from previous searches
   clear();
@@ -105,30 +93,11 @@ $("#foodSearch").on("click", function () {
   });
 });
 
-      for (var i = 0; i < response2.restaurants.length; i++) {
-        var restaurant = response2.restaurants[i].restaurant;
-        restaurantName = restaurant.name;
-        restaurantLink = restaurant.url;
-
-        //TODO: need to update line below
-        physicalAddress = restaurant.user_rating.aggregate_rating;
-        console.log(restaurantName, restaurantLink, physicalAddress);
-
-        // create a card an append it to the page.
-        addToPage(restaurantName, restaurantLink, physicalAddress);
-
-        //created constructor to make an object with information to push to the page. This is not working yet. I might need help. 
-        
-      };
-
-
-
-
 //looking for clicking of the button on the card
 $(document).on("click", "#addToList", function () {
   console.log("I was clicked");
   //this is where I was wanting to call the function Place contructor to append to the page
-//creating a contructor to go inside the array
+  //creating a contructor to go inside the array
   function Place(name, link, address) {
     this.name = name;
     this.link = link;
@@ -146,7 +115,7 @@ $(document).on("click", "#addToList", function () {
     console.log(Place);
   };
   pushToSearchArray();
-  
+
 });
 
 function addToPage(name, link, address) {
