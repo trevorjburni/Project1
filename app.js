@@ -32,9 +32,6 @@ $("#foodSearch").on("click", function () {
   var foodLocation = "&location=" + foodCity + "," + foodState;
   var mapURL = baseMapURL + mapApiKey + foodLocation;
 
-  // log out the mapQuestUrl
-  console.log(mapURL);
-
   // Build the zomato URL.
   var zomatoApiKey = "apikey=a582a844aec19f715b35eb3bf2d2580a";
   var baseZomatoURL = "https://developers.zomato.com/api/v2.1/search?";
@@ -62,18 +59,11 @@ $("#foodSearch").on("click", function () {
     // Build Zomato URL
     zomatoUrl = baseZomatoURL + zomatoApiKey + zomatoCount + zomatoLong + zomatoLat + zomatoCollectionId;
 
-    // log out the zomatoUrl.
-    console.log(zomatoUrl);
-
-
     // ajax call to thse zomato API
     $.ajax({
       url: zomatoUrl,
       method: "GET"
     }).then(function (response2) {
-
-      // Log out the response from zomato
-      console.log(response2);
 
       for (var i = 0; i < response2.restaurants.length; i++) {
         var restaurant = response2.restaurants[i].restaurant;
@@ -82,7 +72,6 @@ $("#foodSearch").on("click", function () {
 
         //TODO: need to update line below
         var physicalAddress = restaurant.location.address;
-        console.log(restaurantName, restaurantLink, physicalAddress);
 
         // create a card an append it to the page.
         addToPage(restaurantName, restaurantLink, physicalAddress);
@@ -94,43 +83,62 @@ $("#foodSearch").on("click", function () {
 
 //looking for clicking of the button on the card
 
-$(document).on("click", ".addToList", function () {
- var buttonTestName = $(this).attr('data-name');
- var buttonTestLink = $(this).attr('data-link');
- var buttonTestAddress = $(this).attr('data-address');
+$(document).on("click", ".addToList", function (event) {
+  event.preventDefault();
 
-// Div to append to
- var divToAppendTo = $("#addList");
+  var buttonTestName = $(this).attr('data-name');
+  var buttonTestLink = $(this).attr('data-link');
+  var buttonTestAddress = $(this).attr('data-address');
 
- var newDiv = $("<div>");
- newDiv.attr({
-   class: "card horizontal",
-   id: name
- })
- var newDiv1 = $("<div>");
- newDiv1.attr({
-   class: "card-stacked"
- });
- var newDiv2 = $("<div>");
- newDiv2.attr({
-   class: "card-content"
- });
+  // Div to append to
+  var divToAppendTo = $("#addList");
 
- var pPlace = $("<p>").text("Restaurant: " + buttonTestName);
- var pLink = $("<p>").text("Link: ");
- var aLink = $("<a>").attr({
-   href: buttonTestLink
- });
- aLink.text(buttonTestLink);
- pLink.append(aLink);
- var pAddress = $("<p>").text("Address: " + buttonTestAddress);
+  var newDiv = $("<div>");
+  newDiv.attr({
+    class: "card horizontal",
+    id: name
+  })
+  var newDiv1 = $("<div>");
+  newDiv1.attr({
+    class: "card-stacked"
+  });
+  var newDiv2 = $("<div>");
+  newDiv2.attr({
+    class: "card-content"
+  });
 
- // add to page
- newDiv2.append(pPlace, pLink, pAddress);
- newDiv1.append(newDiv2)
- newDiv.append(newDiv1);
- divToAppendTo.append(newDiv);
+  var pPlace = $("<p>").text("Restaurant: " + buttonTestName);
+  var pLink = $("<p>").text("Link: ");
+  var aLink = $("<a>").attr({
+    href: buttonTestLink
+  });
+  aLink.text(buttonTestLink);
+  pLink.append(aLink);
+  var pAddress = $("<p>").text("Address: " + buttonTestAddress);
+  var button = $("<button>");
+  button.attr({
+    class: "btn waves-effect waves-light right removeFromList",
+    type: "submit",
+    name: "action",
+    "data-name": buttonTestName,
+    "data-link": buttonTestLink,
+    "data-address": buttonTestAddress,
+  });
 
+  button.text("Remove");
+
+  // add to page
+  newDiv2.append(pPlace, pLink, pAddress, button);
+  newDiv1.append(newDiv2)
+  newDiv.append(newDiv1);
+  divToAppendTo.append(newDiv);
+
+});
+
+// Remove item from the user list
+$(document).on("click", ".removeFromList", function (event) {
+  event.preventDefault();
+  $(this).parent().remove();
 });
 
 function addToPage(name, link, address) {
@@ -189,9 +197,6 @@ $('#beerSearch').on('click', function () {
   var cityBeer = "&by_city" + $('#locationBeer').val().trim();
   var brewURL = bURL + stateBeer + cityBeer;
 
-  // Log out the queryURL
-  console.log(brewURL);
-
   // Clearing out the list from any previous searches
   clear();
 
@@ -212,12 +217,6 @@ $('#beerSearch').on('click', function () {
       var brewState = brewResults[i].state;
       var brewZip = brewResults[i].postal_code;
       var brewWebsite = brewResults[i].website_url;
-      // console.log out results of for loop
-      console.log(brewName);
-      console.log(brewAddress);
-      console.log(brewCity);
-      console.log(brewState);
-      console.log(brewWebsite);
 
       var fullAddress = brewAddress + " " + brewCity + ", " + brewState + " " + brewZip;
 
@@ -226,7 +225,6 @@ $('#beerSearch').on('click', function () {
     };
   });
 });
-
 
 // Function to empty out the list of breweries
 function clear() {
