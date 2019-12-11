@@ -13,7 +13,6 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-var searchArray = [];
 //needed these to be global variables so I moved them
 var restaurantName = "";
 var restaurantLink = "";
@@ -94,33 +93,16 @@ $("#foodSearch").on("click", function () {
 });
 
 //looking for clicking of the button on the card
-$(document).on("click", "#addToList", function () {
-  console.log("I was clicked");
-  //this is where I was wanting to call the function Place contructor to append to the page
-  //creating a contructor to go inside the array
-  function Place(name, link, address) {
-    this.name = name;
-    this.link = link;
-    this.address = address;
-
-    //console.log the array 
-    console.log(searchArray);
-  };
-  //creating an object from contructor
-  var placeToAdd = new Place(restaurantName, restaurantLink, physicalAddress);
-
-  //creating a funciton to push to the array
-  function pushToSearchArray() {
-    searchArray.push(Place);
-    console.log(Place);
-  };
-  pushToSearchArray();
-
+$(document).on("click", ".addToList", function () {
+ var buttonTestName = $(this).attr('data-name')
+ var buttonTestLink = $(this).attr('data-link')
+ var buttonTestAddress = $(this).attr('data-address')
 });
 
 function addToPage(name, link, address) {
 
   // create variables
+
   var divToAppendTo = $("#emptyDiv");
 
   var newDiv = $("<div>");
@@ -147,10 +129,12 @@ function addToPage(name, link, address) {
   var pAddress = $("<p>").text("Address: " + address);
   var button = $("<button>");
   button.attr({
-    class: "btn waves-effect waves-light right",
+    class: "btn waves-effect waves-light right addToList",
     type: "submit",
     name: "action",
-    id: "addToList"
+    "data-name": name,
+    "data-link": link,
+    "data-address": address,
   });
 
   button.text("Add to list");
