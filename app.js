@@ -95,9 +95,41 @@ $("#foodSearch").on("click", function () {
 //looking for clicking of the button on the card
 
 $(document).on("click", ".addToList", function () {
- var buttonTestName = $(this).attr('data-name')
- var buttonTestLink = $(this).attr('data-link')
- var buttonTestAddress = $(this).attr('data-address')
+ var buttonTestName = $(this).attr('data-name');
+ var buttonTestLink = $(this).attr('data-link');
+ var buttonTestAddress = $(this).attr('data-address');
+
+// Div to append to
+ var divToAppendTo = $("#addList");
+
+ var newDiv = $("<div>");
+ newDiv.attr({
+   class: "card horizontal",
+   id: name
+ })
+ var newDiv1 = $("<div>");
+ newDiv1.attr({
+   class: "card-stacked"
+ });
+ var newDiv2 = $("<div>");
+ newDiv2.attr({
+   class: "card-content"
+ });
+
+ var pPlace = $("<p>").text("Restaurant: " + buttonTestName);
+ var pLink = $("<p>").text("Link: ");
+ var aLink = $("<a>").attr({
+   href: buttonTestLink
+ });
+ aLink.text(buttonTestLink);
+ pLink.append(aLink);
+ var pAddress = $("<p>").text("Address: " + buttonTestAddress);
+
+ // add to page
+ newDiv2.append(pPlace, pLink, pAddress);
+ newDiv1.append(newDiv2)
+ newDiv.append(newDiv1);
+ divToAppendTo.append(newDiv);
 
 });
 
