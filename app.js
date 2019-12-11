@@ -26,7 +26,7 @@ $("#foodSearch").on("click", function () {
 
   // Build the MapQuest URL
   var mapApiKey = "key=BQpcYBhtUmRdeHD49tWhOH8jS3nPFCx7";
-  var baseMapURL = "http://www.mapquestapi.com/geocoding/v1/address?";
+  var baseMapURL = "https://www.mapquestapi.com/geocoding/v1/address?";
   var foodCity = $("#locationFoodCity").val().trim().replace(/\s/g, '');
   var foodState = $("#locationFoodState").val().trim().replace(/\s/g, '');
   var foodLocation = "&location=" + foodCity + "," + foodState;
