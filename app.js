@@ -22,7 +22,9 @@ $("#foodSearch").on("click", function () {
   // Build the MapQuest URL
   var mapApiKey = "key=BQpcYBhtUmRdeHD49tWhOH8jS3nPFCx7";
   var baseMapURL = "http://www.mapquestapi.com/geocoding/v1/address?";
-  var foodLocation = "&location=" + $("#locationFood").val().trim().replace(/\s/g, '');
+  var foodCity = $("#locationFoodCity").val().trim().replace(/\s/g, '');
+  var foodState = $("#locationFoodState").val().trim().replace(/\s/g, '');
+  var foodLocation = "&location=" + foodCity + "," + foodState;
   var mapURL = baseMapURL + mapApiKey + foodLocation;
 
   // log out the mapQuestUrl
@@ -74,7 +76,7 @@ $("#foodSearch").on("click", function () {
         var restaurantLink = restaurant.url;
 
         //TODO: need to update line below
-        var physicalAddress = restaurant.user_rating.aggregate_rating;
+        var physicalAddress = restaurant.location.address;
         console.log(restaurantName, restaurantLink, physicalAddress);
 
         // create a card an append it to the page.
