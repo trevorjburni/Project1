@@ -13,7 +13,6 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-var searchArray = [];
 //needed these to be global variables so I moved them
 var restaurantName = "";
 var restaurantLink = "";
@@ -94,13 +93,18 @@ $("#foodSearch").on("click", function () {
 });
 
 //looking for clicking of the button on the card
-$(document).on("click", "#addToList", function () {
- 
+
+$(document).on("click", ".addToList", function () {
+ var buttonTestName = $(this).attr('data-name')
+ var buttonTestLink = $(this).attr('data-link')
+ var buttonTestAddress = $(this).attr('data-address')
+
 });
 
 function addToPage(name, link, address) {
 
   // create variables
+
   var divToAppendTo = $("#emptyDiv");
 
   var newDiv = $("<div>");
@@ -127,10 +131,12 @@ function addToPage(name, link, address) {
   var pAddress = $("<p>").text("Address: " + address);
   var button = $("<button>");
   button.attr({
-    class: "btn waves-effect waves-light right",
+    class: "btn waves-effect waves-light right addToList",
     type: "submit",
     name: "action",
-    id: "addToList"
+    "data-name": name,
+    "data-link": link,
+    "data-address": address,
   });
 
   button.text("Add to list");
