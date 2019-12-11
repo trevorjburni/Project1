@@ -93,10 +93,12 @@ $("#foodSearch").on("click", function () {
 });
 
 //looking for clicking of the button on the card
+
 $(document).on("click", ".addToList", function () {
  var buttonTestName = $(this).attr('data-name')
  var buttonTestLink = $(this).attr('data-link')
  var buttonTestAddress = $(this).attr('data-address')
+
 });
 
 function addToPage(name, link, address) {
