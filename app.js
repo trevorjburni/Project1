@@ -161,14 +161,14 @@ function addToPage(name, link, address) {
     class: "card-content"
   });
 
-  var pPlace = $("<p>").text("Restaurant: " + name);
-  var pLink = $("<p>").text("Link: ");
+  var pPlace = $("<p>").text(name);
+  var pLink = $("<p>");
   var aLink = $("<a>").attr({
     href: link
   });
   aLink.text(link);
   pLink.append(aLink);
-  var pAddress = $("<p>").text("Address: " + address);
+  var pAddress = $("<p>").text(address);
   var button = $("<button>");
   button.attr({
     class: "btn waves-effect waves-light right addToList",
