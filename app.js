@@ -112,7 +112,7 @@ $(document).on("click", ".addToList", function (event) {
   var aLink = $("<a>").attr({
     href: buttonTestLink
   });
-  aLink.text(buttonTestLink);
+  aLink.text("Website");
   pLink.append(aLink);
   var pAddress = $("<p>").text("Address: " + buttonTestAddress);
   var button = $("<button>");
