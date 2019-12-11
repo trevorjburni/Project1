@@ -92,10 +92,8 @@ $("#foodSearch").on("click", function () {
 
         //created constructor to make an object with information to push to the page. This is not working yet. I might need help. 
         
-      }
-    });
-  });
-});
+      };
+
 
 
 
