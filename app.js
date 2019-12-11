@@ -108,7 +108,7 @@ $(document).on("click", ".addToList", function (event) {
   });
 
   var pPlace = $("<p>").text("Restaurant: " + buttonTestName);
-  var pLink = $("<p>").text("Link: ");
+  var pLink = $("<p>");
   var aLink = $("<a>").attr({
     href: buttonTestLink
   });
