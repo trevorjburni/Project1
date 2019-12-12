@@ -161,12 +161,12 @@ function addToPage(name, link, address) {
     class: "card-content"
   });
 
-  var pPlace = $("<p>").text(name);
+  var pPlace = $("<p>").html("<strong>" + name + "</strong>");
   var pLink = $("<p>");
   var aLink = $("<a>").attr({
     href: link
   });
-  aLink.text(link);
+  aLink.text("Click here to visit website");
   pLink.append(aLink);
   var pAddress = $("<p>").text(address);
   var button = $("<button>");
@@ -192,7 +192,6 @@ function addToPage(name, link, address) {
 $('#beerSearch').on('click', function () {
   // Build the Open Brewery URL
   var bURL = "https://api.openbrewerydb.org/breweries?";
-  // var typeBeer = $('#typeBeer').val().trim();
   var stateBeer = "by_state=" + $('#beerState').val().trim();
   var cityBeer = "&by_city" + $('#locationBeer').val().trim();
   var brewURL = bURL + stateBeer + cityBeer;
