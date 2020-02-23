@@ -1,6 +1,6 @@
 # Project1
 
-**Deployed project link** https://magicman88.github.io/Project1/
+**Deployed project link** https://trevorjburni.github.io/Project1/
 
 Foodie Finder is a website that allows the user to search food and breweries in a specific location. The user can add a resturant or brewery to a list and have all their desired destinations in one place that is easily accessible. 
 
