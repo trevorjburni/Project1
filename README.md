@@ -13,7 +13,13 @@ Future Features:
 - HTML
 - CSS
 - JavaScript
-- Zomato, Mapquest and ... API's
+- Zomato, Mapquest and Open Brewery API's
 - Materialize
 - JQuery
 - Firebase
+
+# Contributors
+
+- Trevor Burningham
+- Stephen Green
+- Kellie Hunsaker
