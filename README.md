@@ -7,3 +7,11 @@ Foodie Finder is a website that allows the user to search food and breweries in 
 Future Features: 
 1. Save your personalized list by signing into Google and share a link with your friends
 2. Mobile app
+
+# Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- API
+- Twitter Bootstrap
