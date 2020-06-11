@@ -14,4 +14,5 @@ Future Features:
 - CSS
 - JavaScript
 - API
-- Twitter Bootstrap
+- Materialize
+- JQuery
