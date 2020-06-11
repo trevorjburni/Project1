@@ -13,6 +13,7 @@ Future Features:
 - HTML
 - CSS
 - JavaScript
-- API
+- Zomato, Mapquest and ... API's
 - Materialize
 - JQuery
+- Firebase
